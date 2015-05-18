@@ -53,11 +53,6 @@ abstract class Connection
 	 */
 	static $date_format = 'Y-m-d';
 	/**
-	 * Database's datetime format
-	 * @var string
-	 */
-	static $datetime_format = 'Y-m-d H:i:s T';
-	/**
 	 * Default PDO options to set for each connection.
 	 * @var array
 	 */
@@ -462,7 +457,7 @@ abstract class Connection
 	 */
 	public function datetime_to_string($datetime)
 	{
-		return $datetime->format(static::$datetime_format);
+		return $datetime->format(DateTime::$FORMATS['db']);
 	}
 
 	/**
@@ -479,7 +474,7 @@ abstract class Connection
 		if ($errors['warning_count'] > 0 || $errors['error_count'] > 0)
 			return null;
 
-		return new DateTime($date->format(static::$datetime_format));
+		return new DateTime($date->format(DateTime::$FORMATS['db']));
 	}
 
 	/**
